@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #box {
+            width: 1000px;
+            height: 600px;
+            background: #000000;
+            border: 5px solid red;
+            margin: 20px auto;
+            position: relative;
+        }
+        img{
+            width:20px;
+            height:20px;
+            position:absolute;
+            left:0;
+            top:0;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+</body>
+
+</html>
+
+<script>
+	function create(id){
+	return document.createElement(id);
+}function $id(id){
+	return document.getElementById(id);
+}
+function rand(min,max){
+	return Math.round( Math.random()*(max-min) + min );
+}
+
+ window.onload = function(){
+    	setInterval( function(){
+    	new Snow().init().move();
+    	},800 )
+    }
+    function Snow(){
+    	this.img = create("img");
+    	this.box = $id("box");
+    	this.init = function(){//雪花创建
+    		this.img.src = "img/snow.png";
+    		this.box.appendChild( this.img );
+    		this.img.style.width=this.img.style.height = rand(10,50);
+    		this.img.style.left = "10px";
+    		this.img.style.top = "10px";
+    		return this;
+    	}
+    	this.move = function(){
+    		//定义雪花移动的速度
+    		var speedX = rand(1,5);
+    		var speedY = rand(1,5);
+    		this.timer = setInterval( function(){
+    			this.img.style.left = this.img.offsetLeft +  speedX + "px";
+    			this.img.style.top = this.img.offsetTop + speedY + "px";
+    			if( this.img.offsetLeft < -this.img.offsetWidth || this.img.offsetTop > this.box.offsetHeight ){
+    				clearInterval( this.timer );
+    				this.img.remove();
+    			}
+    		}.bind(this),30 )
+    	}
+    }
+ 
+
+    
+</script>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #box {
+            width: 1000px;
+            height: 600px;
+            background: #000000;
+            border: 5px solid red;
+            margin: 20px auto;
+            position: relative;
+        }
+        img{
+            width:20px;
+            height:20px;
+            position:absolute;
+            left:0;
+            top:0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+</body>
+
+</html>
+<script src="public.js"></script>
+<script src="sport6.js"></script>
+<script>
+
+
+window.onload=function(){
+  time=setInterval(function(){
+    new zpl().init()
+  },50)
+
+   } 
+     function zpl(){
+         this.init=function(){
+            this.img=create("img")
+         this.box=$id("box")
+         this.img.src="img/snow.png"
+         this.left1=2
+
+            this.img.style.left = rand(0,this.box.offsetWidth-this.img.offsetWidth) + "px";
+		   this.img.style.top = "20px";
+                this.box.appendChild( this.img );
+				this.fly();
+                if(this.img.style.offsetTop>this.box.offsetHeight){
+                          this.img.remove()
+
+                }
+         }
+         this.fly=function(){
+             startMove(this.img,{
+             	"left":900,
+             	"top":700
+             })
+
+
+         }
+      }
+
+    
+</script>
